@@ -84,7 +84,7 @@ ForEach ($VM in $Inventory)
         If ($LastUser)
         {
             Write-Host "Last Signed In User on $($Args[0].VM): $LastUser"
-            $$Args[1] += $LastUser
+            $Blacklist = $Args[1] + $LastUser
             $Paths += "\\$($Args[0].VM)\d$\Users\$LastUser\AppData\Local\Microsoft\Windows\INetCache"
             $Paths += "\\$($Args[0].VM)\d$\Users\$LastUser\AppData\Local\Microsoft\Windows\Temporary Internet Files"
             $Paths += "\\$($Args[0].VM)\d$\Users\$LastUser\AppData\Local\Google\Chrome\User Data\Default\Cache"
@@ -101,7 +101,7 @@ ForEach ($VM in $Inventory)
             # If $EnableProfileRemoval is set to $True in configuration, the script will attempt to remove profiles all profiles that aren't in the blacklist
             If ($Args[2] -eq $True)
             {
-                ForEach ($User in (Get-WmiObject -Class Win32_UserProfile -ComputerName $Args[0].VM | Where-Object {$_.LocalPath.Split("\")[-1] -notin $Args[1] -and $_.LocalPath.Split("\")[-1] -notlike "*00*"}))
+                ForEach ($User in (Get-WmiObject -Class Win32_UserProfile -ComputerName $Args[0].VM | Where-Object {$_.LocalPath.Split("\")[-1] -notin $Blacklist -and $_.LocalPath.Split("\")[-1] -notlike "*00*"}))
                 {
                     Write-Output "Attempting to remove profile: $($User.LocalPath)"
                     Try
