@@ -1,5 +1,5 @@
 #Requires -Version 3
-#Requires -Modules VMware.Vim.Automation.Core, ActiveDirectory
+#Requires -Modules VMware.Vim.Automation.Core
 
 $LogDate = Get-Date -Format "yyyy-MM-dd"
 $Transcript = Start-Transcript -LiteralPath "$PSScriptRoot\logs\transcript-$LogDate.log"
