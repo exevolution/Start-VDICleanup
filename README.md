@@ -5,4 +5,4 @@ New cleanup locations are easy to add, though they need to be added midway throu
 
 Start-VDICleanup depends on Get-LastVMUser.psm1 in the Modules folder, so be sure to download that as well.
 
-Best used with Linked Clone style environments, the script will require some tweaking, depending on your environment, specifically the Inventory Building function.
+Best used with Linked Clone style environments, the script will require some tweaking, depending on your environment, specifically the Inventory Building function and the Paths you would like to cleanup
